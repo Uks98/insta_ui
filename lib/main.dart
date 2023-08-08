@@ -33,9 +33,23 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class InstaCloneHome extends StatelessWidget {
+class InstaCloneHome extends StatefulWidget {
   const InstaCloneHome({Key? key}) : super(key: key);
 
+  @override
+  State<InstaCloneHome> createState() => _InstaCloneHomeState();
+}
+
+class _InstaCloneHomeState extends State<InstaCloneHome> {
+
+  late int index;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    index = 0;
+  }
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
@@ -43,14 +57,20 @@ class InstaCloneHome extends StatelessWidget {
         title: Text("Instagram",style: GoogleFonts.lobsterTwo(color: Colors.black,fontSize: 32),),
         centerTitle: false,
         actions: [
-          IconButton(onPressed: (){}, icon: Icon(Icons.favorite_outline,size: 32,),),
-          IconButton(onPressed: (){}, icon: Icon(CupertinoIcons.paperplane,size: 32)),
+          IconButton(onPressed: (){
+            print("a");
+          }, icon: Icon(Icons.favorite_outline,size: 32,),),
+          IconButton(onPressed: (){
+            print("b");
+          }, icon: Icon(CupertinoIcons.paperplane,size: 32)),
 
         ],
       ),
-      body: InstaBody(),
+      body: InstaBody(index : index),
         bottomNavigationBar: BottomNavigationBar(
-        items: [
+          currentIndex: index,
+          onTap: (newIndex) => setState(() => index = newIndex),
+        items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home),label: "Home"),
           BottomNavigationBarItem(icon: Icon(Icons.search),label: "Search"),
       ],
